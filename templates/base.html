@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>E-com</title>
+
+
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+             {% block home_css %}{% endblock %}
+</head>
+<body class="loader">
+
+<!-- NavBar-->
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li><a href="{% url 'home' %}">Shop</a> </li>
+            <li><a href="#">About</a></li>
+            <li><a href="https://www.github.com/deshwalmahesh" target="_blank">Github</a> </li>
+            <li><a href="https://www.instagram.com/deshwal.mahesh" target="_blank">Insta</a> </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>
+		            {% with total_items=cart|length %}
+				        {%	if cart|length > 0 %}
+						    <a href="{% url "cart:show"	%}">
+                                Cart: {{ total_items }} items, Rs {{ cart.total_price }}
+                            </a>
+				        {% else	%}
+
+						    <a href="{% url "cart:show"	%}">Cart Empty</a>
+
+				        {% endif %}
+		            {% endwith %}
+            </li>
+
+            {% if user.is_authenticated  %}
+                 <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a >Welcome {{ user.username }}</a></li>
+
+            {% else %}
+                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user">Login</span></a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Block-->
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

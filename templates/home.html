@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block home_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/home.css' %}">
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <h3 style="color: lightskyblue">Welcome to E-Com Website. Shop By Category!</h3>
+        <div class="jumbotron" style="background: lightcoral">
+            {% for item in category %}
+                <a class="btn btn-primary btn-sm" href="{% url 'category:category_detail' slug=item.slug %}">{{ item.name }}</a>
+                <p></p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
